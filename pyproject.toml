@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-fleet-loop"
+version = "0.1.0"
+description = "A closed fleet loop: nodes triage locally, sync selectively, the hub retrains and canaries the result back down"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "abyyworld" }]
+keywords = ["robotics", "fleet", "mlops", "dagger", "continual-learning", "ota", "canary"]
+
+dependencies = [
+    "numpy>=1.24",
+    "pydantic>=2.5",
+    "typer>=0.9",
+    "rich>=13.0",
+    # The device side of the loop. The hub and the nodes share the bundle
+    # format, the signing scheme and the OTA state machine rather than each
+    # having their own — see docs/WHY_ONE_LIBRARY.md for why that is the right
+    # call at this scale and where it stops being one.
+    "edge-policy-runtime @ git+https://github.com/abyyworld/edge-policy-runtime@main",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.3"]
+
+[project.scripts]
+fleet-loop = "fleet_loop.cli:app"
+
+[project.urls]
+Repository = "https://github.com/abyyworld/robot-fleet-loop"
+Device = "https://github.com/abyyworld/edge-policy-runtime"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]

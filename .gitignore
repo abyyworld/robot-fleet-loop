@@ -1,0 +1,24 @@
+# Fleet state: node stores, hub datasets, releases and dashboards are runtime
+# data. The composition records that describe a dataset are what deserve to be
+# tracked, and those live inside the dataset directory the loop writes.
+/var/
+/reports/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+*.npz
+*.tar.gz
+.DS_Store
+.idea/
+.vscode/
