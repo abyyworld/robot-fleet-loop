@@ -36,11 +36,11 @@ round 1  fleet 32%
 round 4  fleet 56%
 │ promoted v2 to the whole fleet — v2 vs v1: +38.6% [+31.1%, +46.4%] → PROMOTE
 ...
-round 8  fleet 94%
-│ promoted v3 to the whole fleet — v3 vs v2: +52.8% [+46.9%, +58.3%] → PROMOTE
+round 7  fleet 96%
+│ promoted v3 to the whole fleet — v3 vs v2: +50.6% [+44.2%, +56.4%] → PROMOTE
 
-fleet success rate 32% → 94% over 8 rounds, 3 versions published, 0 rolled back
-hub: 425 episodes from 60 shards (867 KiB), 1440 outcomes, 3 dataset versions
+fleet success rate 32% → 96% over 8 rounds, 3 versions published, 0 rolled back
+hub: 416 episodes from 58 shards (852 KiB), 1440 outcomes, 3 dataset versions
 ```
 
 Round 1 is the premise. The factory policy was trained before deployment on the
@@ -52,7 +52,7 @@ never saw those states, so it extrapolates, and a policy extrapolating is a
 policy guessing. **No amount of examining v1's training metrics would have
 revealed it. Only running it there does.**
 
-Eight rounds later the fleet is at 94%, on **16% of the states it observed**,
+Eight rounds later the fleet is at 96%, on **16% of the states it observed**,
 with every release traceable to the dataset that produced it and every promotion
 made on a confidence interval rather than a timer.
 
@@ -109,7 +109,7 @@ length, which is what the knapsack wanted in the first place.
 
 A gate whose input is filtered by a value heuristic is measuring the heuristic.
 This is the single most useful decision in the repo: 1440 outcomes reached the
-hub against 425 trajectories, so the comparison that decides promotion is
+hub against 416 trajectories, so the comparison that decides promotion is
 computed on *everything the fleet did*, while the bytes are spent only on what is
 worth labelling.
 
