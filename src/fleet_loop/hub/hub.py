@@ -326,5 +326,5 @@ class Hub:
 
     def write_release_log(self) -> Path:
         path = self.root / "releases.json"
-        path.write_text(json.dumps(self.release_log, indent=2))
+        path.write_text(json.dumps(self.release_log, indent=2), encoding="utf-8")
         return path

@@ -235,7 +235,7 @@ def show(root: str = RootOpt) -> None:
     table.add_column("dataset")
     table.add_column("sim")
     table.add_column("notes", overflow="fold")
-    for record in json.loads(path.read_text()):
+    for record in json.loads(path.read_text(encoding="utf-8")):
         table.add_row(
             str(record["version"]),
             f"{record['rollout_percent']}%",

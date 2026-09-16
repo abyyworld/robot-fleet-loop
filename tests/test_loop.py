@@ -143,7 +143,7 @@ def test_the_dashboard_renders_and_serialises(completed, tmp_path):
     assert state["published_version"] >= 1
 
     path = dashboard.write_html(state, tmp_path / "fleet.html")
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     assert "fleet" in text
     for node in nodes:
         assert node.config.node_id in text

@@ -18,6 +18,19 @@ make rollback    # ship a release every pre-flight check approves, and watch it 
 make test        # 94 tests
 ```
 
+The `make` targets are thin wrappers and assume a Unix shell. macOS needs
+nothing extra. On Windows there is no `make`, so call the same entry points
+directly:
+
+```powershell
+py -3.12 -m venv .venv
+.venv\Scripts\python -m pip install -U pip
+.venv\Scripts\pip install -e ".[dev]"
+.venv\Scripts\fleet-loop run --rounds 8 --root .fleet
+```
+
+Tested on Linux, macOS and Windows in CI.
+
 Built on [`edge-policy-runtime`](https://github.com/abyyworld/edge-policy-runtime) —
 the signed over-the-air down-link, the device health gate and the telemetry
 up-link are that repo's, and nothing here reimplements them.

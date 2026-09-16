@@ -80,7 +80,7 @@ class DatasetVersion(BaseModel):
     def write(self, path: Path | str) -> Path:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(self.model_dump(mode="json"), indent=2))
+        path.write_text(json.dumps(self.model_dump(mode="json"), indent=2), encoding="utf-8")
         return path
 
 
