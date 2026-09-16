@@ -203,9 +203,9 @@ def test_a_regression_the_hub_cannot_simulate_is_caught_by_the_fleet(tmp_path):
     assert {n.policy_version for n in nodes} == {restored}
 
     running = hub.policy_of(restored).content_hash()
-    assert running == hub.policy_of(incumbent).content_hash(), (
-        "the rollback did not restore the incumbent's policy"
-    )
+    assert (
+        running == hub.policy_of(incumbent).content_hash()
+    ), "the rollback did not restore the incumbent's policy"
 
 
 def test_a_hub_with_no_data_does_not_retrain(tmp_path):

@@ -114,9 +114,9 @@ def test_real_trajectories_compress_on_the_wire():
     manifest, payload = pack(episodes)
     raw = sum(t.nbytes for t in episodes)
     assert manifest.n_bytes == len(payload)
-    assert raw / manifest.n_bytes > 1.5, (
-        "the wire encoding regressed; the budget maths depends on it"
-    )
+    assert (
+        raw / manifest.n_bytes > 1.5
+    ), "the wire encoding regressed; the budget maths depends on it"
 
     # And the precision that buys is bounded, in the units that matter.
     restored = unpack_shard(manifest, payload)
