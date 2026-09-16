@@ -52,9 +52,10 @@ never saw those states, so it extrapolates, and a policy extrapolating is a
 policy guessing. **No amount of examining v1's training metrics would have
 revealed it. Only running it there does.**
 
-Eight rounds later the fleet is at 96%, on **16% of the states it observed**,
-with every release traceable to the dataset that produced it and every promotion
-made on a confidence interval rather than a timer.
+Eight rounds later the fleet is at 96%, on **8% of the states it observed**
+(416 episodes uploaded out of 5,298 run), with every release traceable to the
+dataset that produced it and every promotion made on a confidence interval
+rather than a timer.
 
 ## What is actually hard here
 
@@ -277,9 +278,9 @@ showing you the hub's intentions.
 ```
 fleet — published v3, canary v4                        skew: v3, v4
 node                   conditions      running  success  p99 ms  backlog  dropped  refused
-node-01-nominal        nominal              v3     100%    0.01      221        —        —
-node-02-miscalibrated  miscalibrated        v3     100%    0.01      388        —        —
-node-03-long-reach     long-reach           v3      87%    0.01      355       61        —
+node-01-nominal        nominal              v3     100%    0.04      221        —        —
+node-02-miscalibrated  miscalibrated        v3     100%    0.04      387        —        —
+node-03-long-reach     long-reach           v3      88%    0.04      362       54        —
 ```
 
 `backlog` and `dropped` are the fleet's blind spot: a node that has quietly been
