@@ -29,7 +29,9 @@ py -3.12 -m venv .venv
 .venv\Scripts\fleet-loop run --rounds 8 --root .fleet
 ```
 
-Tested on Linux, macOS and Windows in CI.
+Tested on Linux and macOS in CI. On Windows use WSL: activation swaps a
+symlink so a device rebooting mid-update never comes up with no policy,
+and Windows has no unprivileged equivalent.
 
 Built on [`edge-policy-runtime`](https://github.com/abyyworld/edge-policy-runtime) —
 the signed over-the-air down-link, the device health gate and the telemetry
