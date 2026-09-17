@@ -58,7 +58,7 @@ jobs:
       - run: |
           pip install --upgrade pip
           pip install -e '.[dev]'
-      - run: pytest -q --cov=fleet_loop --cov-report=term-missing
+      - run: pytest --cov=fleet_loop --cov-report=term-missing
 
   the-loop-must-close:
     # Every other job here checks a part. This one checks the claim, and it is
@@ -83,24 +83,24 @@ jobs:
 
       - name: The premise — one policy is not good on every node
         run: |
-          pytest -q \
+          pytest \
             tests/test_dataset_and_train.py::test_a_policy_trained_on_one_environment_does_not_generalise \
             tests/test_dataset_and_train.py::test_training_on_fleet_data_closes_the_gap
 
       - name: The loop closes, on a fraction of the data
         run: |
-          pytest -q \
+          pytest \
             tests/test_loop.py::test_the_fleet_gets_better_from_its_own_data \
             tests/test_loop.py::test_the_loop_closes_on_a_fraction_of_the_data \
             tests/test_loop.py::test_every_episode_is_measured_even_though_most_are_not_collected \
             tests/test_loop.py::test_the_shipped_set_is_not_only_failures
 
       - name: A regression no pre-flight check can see is caught and undone
-        run: pytest -q tests/test_loop.py::test_a_regression_the_hub_cannot_simulate_is_caught_by_the_fleet
+        run: pytest tests/test_loop.py::test_a_regression_the_hub_cannot_simulate_is_caught_by_the_fleet
 
       - name: Nothing is promoted without evidence, and nothing without a cohort
         run: |
-          pytest -q \
+          pytest \
             tests/test_loop.py::test_promotion_happens_on_fleet_evidence_not_on_a_timer \
             tests/test_loop.py::test_a_release_reaches_a_cohort_before_the_fleet \
             tests/test_loop.py::test_every_release_is_traceable_to_the_data_that_produced_it
@@ -110,14 +110,14 @@ jobs:
         # has not shown a release is safe. If INCONCLUSIVE stops happening, the
         # gate has started manufacturing confidence.
         run: |
-          pytest -q \
+          pytest \
             tests/test_canary.py::test_a_difference_the_run_cannot_resolve_is_inconclusive \
             tests/test_canary.py::test_an_identical_policy_needs_the_study_the_power_calculation_asks_for \
             tests/test_canary.py::test_only_nodes_that_ran_both_versions_count \
             tests/test_canary.py::test_a_release_that_collapses_on_one_node_is_refused
 
       - name: Bad fleet data must never reach the training set
-        run: pytest -q tests/test_ingest.py
+        run: pytest tests/test_ingest.py
 
       - name: Run it for real and summarise
         run: |
